@@ -55,11 +55,30 @@
             }),
             $('#cep').blur(function(){
                 var cep = $(this).val()
-                $.get("https://viacep.com.br/ws/"+cep+"/json/", function(dados, status) {
-                    $('#city').val(dados.localidade)
-                    $('#uf').val(dados.uf)
-                })
+                $.ajax({ 
+                    url: "https://viacep.com.br/ws/"+cep+"/json/",
+                    type: "GET",
+                    success: function(dados, status){
+                        $('#city').val(dados.localidade)
+                        $('#uf').val(dados.uf)
+                    },
+                    error: function(){
+                        alert('houve um problema na consulta do cep inserido.')
+                    }
+             })
+                // $.get("https://viacep.com.br/ws/"+cep+"/json/", function(dados, status) {
+                //     if(status == "sucess"){
+                //         $('#city').val(dados.localidade)
+                //         $('#uf').val(dados.uf)
+                //     }else{
+                //         alert('houve um problema na consulta do cep inserido.')
+                //     }
+                // })
+                
             })
+            // outro modo
+            // $.post("https://seusite.com.br"), { nome: }
+            
         })
     </script>
 </body>
