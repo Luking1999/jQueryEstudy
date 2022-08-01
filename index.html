@@ -25,6 +25,15 @@
     <input id="cep" type="cep" placeholder="Digite o seu cep">
     <input id="city" type="city" placeholder="Cidade">
     <input id="uf" type="uf" placeholder="UF">
+    <hr><br>
+    <input id="busca" type="text" placeholder="Buscar na lista">
+    <ul id="lista">
+        <li>Arroz</li>
+        <li>Feijão</li>
+        <li>Frutas</li>
+        <li>Sabão</li>
+        <li>Peixe</li>
+    </ul>
 
     <script>
         $(document).ready(function() {
@@ -78,6 +87,13 @@
             })
             // outro modo
             // $.post("https://seusite.com.br"), { nome: }
+            $("#busca").keyup(function(){
+                var valor = $(this).val().toLowerCase()
+                $("#lista li").filter(function(){
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(valor) > -1)
+                })
+
+            })
             
         })
     </script>
