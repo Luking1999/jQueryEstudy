@@ -10,11 +10,57 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus asperiores, molestias in ullam perspiciatis delectus sunt, beatae tenetur officiis magnam doloribus dolor fugiat velit quam vel amet omnis esse quo?</p>
     <p id="teste">Isso é um paragrafo</p>
     <p class="p-yellow">Outro paragrafo</p>
+    <input type="text" id="text" placeholder="Digite algo">
+    <hr>
+    <button id="btn" style="padding: 50px;">clique aki</button>
     <script src="js/jquery-3.6.0.js"></script>
+    <hr>
+    <h1>conheçendo AJAX</h1>
+    <div id="teste">
+        <p>Um conteudo inicial</p>
+    </div>
+    <br>
+    <button id="btn2"> clique aki para obter um conteudo externo</button>
+    <hr><br>
+    <input id="cep" type="cep" placeholder="Digite o seu cep">
+    <input id="city" type="city" placeholder="Cidade">
+    <input id="uf" type="uf" placeholder="UF">
+
     <script>
         $(document).ready(function() {
+            // seletores
             $('#teste').html('inserido com jQuery')
+            $('#btn').click(function(){
+                $(this).html('mudei quando fui clicado')
+            })
+            $('#btn').on({
+                mouseenter: function(){
+                    $(this).css('background-color', 'blue')
+                },
+                click: function(){
+                    $(this).css('background-color', 'green')
+                },
+                mouseleave: function() {
+                    $(this).css('background-color', 'gray')
+                }
+            })
+            $('#text').blur(function(){
+                var valor = $(this).val();
+                alert('foi digitado: '+valor)
+            })
+            // AJAX - Asynchonous Javascript And Xml
+            // webservice usado para estudo
+            $('#btn2').mouseover(function(){
+                $('#teste').load("teste.txt")
+            }),
+            $('#cep').blur(function(){
+                var cep = $(this).val()
+                $.get("https://viacep.com.br/ws/"+cep+"/json/", function(dados, status) {
+                    $('#city').val(dados.localidade)
+                    $('#uf').val(dados.uf)
+                })
+            })
         })
-        </script>
+    </script>
 </body>
 </html>

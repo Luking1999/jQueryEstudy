@@ -1,0 +1,2 @@
+<h2> estudando AJAX </h2>
+<p> Este conteudo foi puxado de um lugar "externo"</p>
